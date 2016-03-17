@@ -25,7 +25,7 @@ void Worker::dirTraverse( QString fromDir,QString toDir )
 	m_sFromDir = fromDir;
 	m_sToDir = toDir;
 	emit clearTableData();
-	//Çå³ıÊı¾İ
+	//æ¸…é™¤æ•°æ®
 	producerVector.clear();
 	consumerVector.clear();
 	maxCopySpeed.clear();
@@ -70,27 +70,27 @@ void Worker::createFolder(QString folderDir)
 
 void Worker::copyFile(QString fromFilePath)
 {
-	//²Ù×÷Ô´Â·¾¶ÎÄ¼ş
+	//æ“ä½œæºè·¯å¾„æ–‡ä»¶
 	QFile inFile(fromFilePath);
 	if (!inFile.open(QIODevice::ReadOnly))
 	{
 		return;
 	}
-	//³õÊ¼»¯Êı¾İ
+	//åˆå§‹åŒ–æ•°æ®
 	dataSize = inFile.size();
 	numUsedBytes = 0;
 	maxCopySpeed.push_back(0.0);
 	inFile.close();
 
-	//²Ù×÷Ä¿µÄÂ·¾¶
-	QString fileName = QFileInfo(fromFilePath).fileName();//ÌáÈ¡ÎÄ¼şÃû
-	QString relativePath = QDir(m_sFromDir).relativeFilePath(fromFilePath);//ÌáÈ¡Ïà¶ÔÂ·¾¶
-	QString toFilePath = QDir::fromNativeSeparators(m_sToDir);//×ª»»Â·¾¶'\'Îª¡®/¡¯
+	//æ“ä½œç›®çš„è·¯å¾„
+	QString fileName = QFileInfo(fromFilePath).fileName();//æå–æ–‡ä»¶å
+	QString relativePath = QDir(m_sFromDir).relativeFilePath(fromFilePath);//æå–ç›¸å¯¹è·¯å¾„
+	QString toFilePath = QDir::fromNativeSeparators(m_sToDir);//è½¬æ¢è·¯å¾„'\'ä¸ºâ€˜/â€™
 	if (!QDir(m_sToDir).isRoot())
 	{
 		toFilePath += "/";
 	}
-	toFilePath += relativePath;//×îÖÕ´æ·ÅÂ·¾¶
+	toFilePath += relativePath;//æœ€ç»ˆå­˜æ”¾è·¯å¾„
 	QFile outFile(toFilePath);
 	if (!outFile.open(QIODevice::WriteOnly))
 	{
@@ -122,7 +122,7 @@ void Worker::copyFile(QString fromFilePath)
 	tableItem.fileSize = QFileInfo(fromFilePath).size();
 	tableItem.cpoyTime = sec;
 	if (tableItem.fileSize != 0)
-		tableItem.speedPerMB = tableItem.cpoyTime/tableItem.fileSize;
+		tableItem.speedPerMB = tableItem.cpoyTime*1024*1024/tableItem.fileSize;
 	else
 		tableItem.speedPerMB = 0;
 	createLog(fromFilePath,toFilePath);
