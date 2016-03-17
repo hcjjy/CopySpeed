@@ -52,13 +52,13 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
 			switch(section)
 			{
 			case 0:
-				return "ÎÄ¼şÃû";
+				return "æ–‡ä»¶å";
 			case 1:
-				return "ÎÄ¼ş´óĞ¡";
+				return "æ–‡ä»¶å¤§å°(B)";
 			case 2:
-				return "¿½±´Ê±³¤";
+				return "æ‹·è´æ—¶é•¿(s)";
 			case 3:
-				return "¿½±´ËÙ¶È(s/M)";
+				return "æ‹·è´é€Ÿåº¦(s/M)";
 			}
 		}
 	}
